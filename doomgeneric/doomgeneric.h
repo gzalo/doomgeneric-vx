@@ -4,15 +4,13 @@
 #include <stdlib.h>
 #include <stdint.h>
 
-#define DOOMGENERIC_RESX 640
-#define DOOMGENERIC_RESY 400
-
+#define DOOMGENERIC_RESX 320
+#define DOOMGENERIC_RESY 240
 
 extern uint32_t* DG_ScreenBuffer;
 
 void doomgeneric_Create(int argc, char **argv);
 void doomgeneric_Tick();
-
 
 //Implement below functions for your platform
 void DG_Init();

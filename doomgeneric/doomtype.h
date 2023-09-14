@@ -32,7 +32,7 @@
 
 #else
 
-#include <strings.h>
+#include <string.h>
 
 #endif
 
@@ -60,7 +60,9 @@
 // pre-standardisation version).  inttypes.h is also in the C99 
 // standard and defined to include stdint.h, so include this. 
 
-#include <inttypes.h>
+#include <stdint.h>
+
+char *strdup(const char *s1);
 
 #ifdef __cplusplus
 
@@ -74,7 +76,7 @@ typedef enum
 {
     false	= 0,
     true	= 1,
-	undef	= 0xFFFFFFFF
+	undef	= (int)0xFFFFFFFF
 } boolean;
 
 #endif

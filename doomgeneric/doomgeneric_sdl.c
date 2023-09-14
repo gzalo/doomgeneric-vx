@@ -8,7 +8,8 @@
 #include <unistd.h>
 
 #include <stdbool.h>
-#include <SDL.h>
+#include <SDL2/SDL.h>
+#include <ctype.h>
 
 SDL_Window* window = NULL;
 SDL_Renderer* renderer = NULL;
@@ -135,8 +136,8 @@ void DG_Init(){
   window = SDL_CreateWindow("DOOM",
                             SDL_WINDOWPOS_UNDEFINED,
                             SDL_WINDOWPOS_UNDEFINED,
-                            DOOMGENERIC_RESX,
                             DOOMGENERIC_RESY,
+                            DOOMGENERIC_RESX,
                             SDL_WINDOW_SHOWN
                             );
 
@@ -147,12 +148,12 @@ void DG_Init(){
   // Render the rect to the screen
   SDL_RenderPresent(renderer);
 
-  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB888, SDL_TEXTUREACCESS_TARGET, DOOMGENERIC_RESX, DOOMGENERIC_RESY);
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_TARGET, DOOMGENERIC_RESY, DOOMGENERIC_RESX);
 }
 
 void DG_DrawFrame()
 {
-  SDL_UpdateTexture(texture, NULL, DG_ScreenBuffer, DOOMGENERIC_RESX*sizeof(uint32_t));
+  SDL_UpdateTexture(texture, NULL, DG_ScreenBuffer, DOOMGENERIC_RESY*sizeof(uint16_t));
 
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, texture, NULL, NULL);

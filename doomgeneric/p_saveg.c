@@ -254,7 +254,7 @@ static void saveg_read_actionf_t(actionf_t *str)
 static void saveg_write_actionf_t(actionf_t *str)
 {
     // actionf_p1 acp1;
-    saveg_writep(str->acp1);
+    saveg_writep((void*)str->acp1);
 }
 
 //

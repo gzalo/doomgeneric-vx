@@ -25,7 +25,6 @@
 static const char
 rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 
-#include "config.h"
 #include "v_video.h"
 #include "m_argv.h"
 #include "d_event.h"
@@ -38,14 +37,9 @@ rcsid[] = "$Id: i_x.c,v 1.6 1997/02/03 22:45:10 b1 Exp $";
 
 #include "doomgeneric.h"
 
-#include <stdbool.h>
 #include <stdlib.h>
 
-#include <fcntl.h>
-
 #include <stdarg.h>
-
-#include <sys/types.h>
 
 //#define CMAP256
 
@@ -142,7 +136,7 @@ void cmap_to_rgb565(uint16_t * out, uint8_t * in, int in_pixels)
 
         in++;
         for (j = 0; j < fb_scaling; j++) {
-            out++;
+            out+=240;
         }
     }
 }
@@ -183,7 +177,7 @@ void I_InitGraphics (void)
 	s_Fb.yres = DOOMGENERIC_RESY;
 	s_Fb.xres_virtual = s_Fb.xres;
 	s_Fb.yres_virtual = s_Fb.yres;
-	s_Fb.bits_per_pixel = 32;
+	s_Fb.bits_per_pixel = 16;
 
 	s_Fb.blue.length = 8;
 	s_Fb.green.length = 8;
@@ -269,13 +263,15 @@ void I_FinishUpdate (void)
     line_in  = (unsigned char *) I_VideoBuffer;
     line_out = (unsigned char *) DG_ScreenBuffer;
 
+    line_out += 239*2;
+
     y = SCREENHEIGHT;
 
     while (y--)
     {
         int i;
         for (i = 0; i < fb_scaling; i++) {
-            line_out += x_offset;
+            //line_out += x_offset;
 #ifdef CMAP256
             for (fb_scaling == 1) {
                 memcpy(line_out, line_in, SCREENWIDTH); /* fb_width is bigger than Doom SCREENWIDTH... */
@@ -283,10 +279,10 @@ void I_FinishUpdate (void)
                 //XXX FIXME fb_scaling support!
             }
 #else
-            //cmap_to_rgb565((void*)line_out, (void*)line_in, SCREENWIDTH);
-            cmap_to_fb((void*)line_out, (void*)line_in, SCREENWIDTH);
+            cmap_to_rgb565((void*)line_out, (void*)line_in, SCREENWIDTH);
+            //cmap_to_fb((void*)line_out, (void*)line_in, SCREENWIDTH);
 #endif
-            line_out += (SCREENWIDTH * fb_scaling * (s_Fb.bits_per_pixel/8)) + x_offset_end;
+            line_out -=2/*= (SCREENWIDTH * fb_scaling * (s_Fb.bits_per_pixel/8)) + x_offset_end*/;
         }
         line_in += SCREENWIDTH;
     }

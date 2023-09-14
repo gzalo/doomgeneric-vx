@@ -18,7 +18,6 @@
 #include <ctype.h>
 #include <math.h>
 #include <string.h>
-#include <fcntl.h>
 #include <stdio.h>
 
 #include "config.h"
