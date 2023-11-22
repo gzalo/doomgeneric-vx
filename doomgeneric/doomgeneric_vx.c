@@ -54,6 +54,7 @@ void _fp_init(){
 //static displayInfo_t _display;
 //static uint16_t *framebuffer = NULL;
 static int console = -1;
+static int card = -1;
 //static int serial = -1;
 static FILE *out;
 static FILE *err;
@@ -112,11 +113,19 @@ void DG_Init(void){
 		set_display_coordinate_mode(PIXEL_MODE);
 	}
 }
+
+static char buf[500] = "";
+
 void DG_DrawFrame(void){
   //vxputs("Drawing frame\n");
   display_frame_buffer(0, 0, 240, 320, (short*)DG_ScreenBuffer);
 
   prevFrameKeys = frameKeys;
+
+  if(card_pending()){
+    read(card, buf, sizeof(buf));
+    frameKeys |= 128;
+  }
 
   int pending = kbd_pending_count();
   if(pending){
@@ -264,6 +273,7 @@ void DG_SetWindowTitle(const char * title){
 int main(int argc, char **argv){
     out = fopen("out.log", "w");
     err = fopen("err.log", "w");
+    card = open(DEV_CARD, 0);
 
     if((_SYS_VERSION>=0x301) && (_syslib_version()>=0x301)) {
       //setFree(FREE_TYPE_NO_VALIDATE);
