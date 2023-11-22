@@ -86,7 +86,7 @@ static byte saveg_read8(void)
     {
         if (!savegame_error)
         {
-            fprintf(stderr, "saveg_read8: Unexpected end of file while "
+            vxprintferr("saveg_read8: Unexpected end of file while "
                             "reading save game\n");
 
             savegame_error = true;
@@ -102,7 +102,7 @@ static void saveg_write8(byte value)
     {
         if (!savegame_error)
         {
-            fprintf(stderr, "saveg_write8: Error while writing save game\n");
+            vxprintferr( "saveg_write8: Error while writing save game\n");
 
             savegame_error = true;
         }
@@ -248,7 +248,7 @@ static void saveg_write_mapthing_t(mapthing_t *str)
 static void saveg_read_actionf_t(actionf_t *str)
 {
     // actionf_p1 acp1;
-    str->acp1 = saveg_readp();
+    str->acp1 = (actionf_p1)saveg_readp();
 }
 
 static void saveg_write_actionf_t(actionf_t *str)

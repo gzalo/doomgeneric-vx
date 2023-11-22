@@ -155,7 +155,7 @@ byte *I_ZoneBase (int *size)
 
     zonemem = AutoAllocMemory(size, default_ram, min_ram);
 
-    printf("zone memory: %p, %x allocated for zone\n", 
+    vxprintf("zone memory: %p, %x allocated for zone\n", 
            zonemem, *size);
 
     return zonemem;
@@ -167,9 +167,9 @@ void I_PrintBanner(char *msg)
     int spaces = 35 - (strlen(msg) / 2);
 
     for (i=0; i<spaces; ++i)
-        putchar(' ');
+        vxputchar(' ');
 
-    puts(msg);
+    vxputs(msg);
 }
 
 void I_PrintDivider(void)
@@ -178,10 +178,10 @@ void I_PrintDivider(void)
 
     for (i=0; i<75; ++i)
     {
-        putchar('=');
+        vxputchar('=');
     }
 
-    putchar('\n');
+    vxputchar('\n');
 }
 
 void I_PrintStartupBanner(char *gamedescription)
@@ -190,7 +190,7 @@ void I_PrintStartupBanner(char *gamedescription)
     I_PrintBanner(gamedescription);
     I_PrintDivider();
     
-    printf(
+    vxprintf(
     " " PACKAGE_NAME " is free software, covered by the GNU General Public\n"
     " License.  There is NO warranty; not even for MERCHANTABILITY or FITNESS\n"
     " FOR A PARTICULAR PURPOSE. You are welcome to change and distribute\n"
@@ -207,6 +207,7 @@ void I_PrintStartupBanner(char *gamedescription)
 
 boolean I_ConsoleStdout(void)
 {
+    return 0;
 #ifdef _WIN32
     // SDL "helpfully" always redirects stdout to a file.
     return 0;
@@ -363,7 +364,7 @@ void I_Error (char *error, ...)
 
     if (already_quitting)
     {
-        fprintf(stderr, "Warning: recursive call to I_Error detected.\n");
+        vxprintferr("Warning: recursive call to I_Error detected.\n");
 #if ORIGCODE
         exit(-1);
 #endif
@@ -376,10 +377,10 @@ void I_Error (char *error, ...)
     // Message first.
     va_start(argptr, error);
     //fprintf(stderr, "\nError: ");
-    vfprintf(stderr, error, argptr);
-    fprintf(stderr, "\n\n");
+    vxvprintferr( error, argptr);
+    vxprintferr("\n\n");
     va_end(argptr);
-    fflush(stderr);
+    vxfflusherr();
 
     // Write a copy of the message into buffer.
     va_start(argptr, error);

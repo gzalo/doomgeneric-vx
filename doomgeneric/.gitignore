@@ -1,0 +1,7 @@
+.idea/
+lib/
+include/
+out.txt
+err.txt
+app.map
+link.ld

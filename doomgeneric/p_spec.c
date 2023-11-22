@@ -1228,7 +1228,7 @@ static void DonutOverrun(fixed_t *s3_floorheight, short *s3_floorpic,
 
             if (tmp_s3_floorpic >= numflats)
             {
-                fprintf(stderr,
+                vxprintferr(
                         "DonutOverrun: The second parameter for \"-donut\" "
                         "switch should be greater than 0 and less than number "
                         "of flats (%d). Using default value (%d) instead. \n",
@@ -1237,14 +1237,6 @@ static void DonutOverrun(fixed_t *s3_floorheight, short *s3_floorpic,
             }
         }
     }
-
-    /*
-    fprintf(stderr,
-            "Linedef: %d; Sector: %d; "
-            "New floor height: %d; New floor pic: %d\n",
-            line->iLineID, pillar_sector->iSectorID,
-            tmp_s3_floorheight >> 16, tmp_s3_floorpic);
-     */
 
     *s3_floorheight = (fixed_t) tmp_s3_floorheight;
     *s3_floorpic = (short) tmp_s3_floorpic;
@@ -1290,7 +1282,7 @@ int EV_DoDonut(line_t*	line)
 
         if (s2 == NULL)
         {
-            fprintf(stderr,
+            vxprintferr(
                     "EV_DoDonut: linedef had no second sidedef! "
                     "Unexpected behavior may occur in Vanilla Doom. \n");
 	    break;
@@ -1311,7 +1303,7 @@ int EV_DoDonut(line_t*	line)
                 // s3->floorpic is a short at 0000:0008
                 // Trying to emulate
 
-                fprintf(stderr,
+                vxprintferr(
                         "EV_DoDonut: WARNING: emulating buffer overrun due to "
                         "NULL back sector. "
                         "Unexpected behavior may occur in Vanilla Doom.\n");

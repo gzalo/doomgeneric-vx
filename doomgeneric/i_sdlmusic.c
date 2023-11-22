@@ -645,7 +645,7 @@ static boolean ReadSubstituteConfig(char *filename)
 
         if (error != NULL)
         {
-            fprintf(stderr, "%s:%i: Error: %s\n", filename, linenum, error);
+            vxprintferr("%s:%i: Error: %s\n", filename, linenum, error);
         }
 
         ++linenum;
@@ -688,7 +688,7 @@ static void LoadSubstituteConfigs(void)
 
     if (subst_music_len > 0)
     {
-        printf("Loaded %i music substitutions from config files.\n",
+        vxprintf("Loaded %i music substitutions from config files.\n",
                subst_music_len);
     }
 }
@@ -770,7 +770,7 @@ static void DumpSubstituteConfig(char *filename)
     fprintf(fs, "\n");
     fclose(fs);
 
-    printf("Substitute MIDI config file written to %s.\n", filename);
+    vxprintf("Substitute MIDI config file written to %s.\n", filename);
     I_Quit();
 }
 
@@ -895,7 +895,7 @@ static boolean I_SDL_InitMusic(void)
         if (SDL_VERSIONNUM(v->major, v->minor, v->patch)
           < SDL_VERSIONNUM(1, 2, 11))
         {
-            printf("\n"
+            vxprintf("\n"
                "                   *** WARNING ***\n"
                "      You are using an old version of SDL_mixer.\n"
                "      Music playback on this version may cause crashes\n"
@@ -930,11 +930,11 @@ static boolean I_SDL_InitMusic(void)
     {
         if (SDL_Init(SDL_INIT_AUDIO) < 0)
         {
-            fprintf(stderr, "Unable to set up sound.\n");
+            vxprintferr("Unable to set up sound.\n");
         }
         else if (Mix_OpenAudio(snd_samplerate, AUDIO_S16SYS, 2, 1024) < 0)
         {
-            fprintf(stderr, "Error initializing SDL_mixer: %s\n",
+            vxprintferr("Error initializing SDL_mixer: %s\n",
                     Mix_GetError());
             SDL_QuitSubSystem(SDL_INIT_AUDIO);
         }
@@ -1153,7 +1153,7 @@ static void *I_SDL_RegisterSong(void *data, int len)
         {
             // Fall through and play MIDI normally, but print an error
             // message.
-            fprintf(stderr, "Failed to load substitute music file: %s: %s\n",
+            vxprintferr("Failed to load substitute music file: %s: %s\n",
                     filename, Mix_GetError());
         }
         else
@@ -1192,7 +1192,7 @@ static void *I_SDL_RegisterSong(void *data, int len)
     {
         // Failed to load
 
-        fprintf(stderr, "Error loading midi: %s\n", Mix_GetError());
+        vxprintferr("Error loading midi: %s\n", Mix_GetError());
     }
 
     // Remove the temporary MIDI file; however, when using an external

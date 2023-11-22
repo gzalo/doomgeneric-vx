@@ -710,12 +710,12 @@ void WritePCXfile(char *filename, byte *data,
 
 static void error_fn(png_structp p, png_const_charp s)
 {
-    printf("libpng error: %s\n", s);
+    vxprintf("libpng error: %s\n", s);
 }
 
 static void warning_fn(png_structp p, png_const_charp s)
 {
-    printf("libpng warning: %s\n", s);
+    vxprintf("libpng warning: %s\n", s);
 }
 
 void WritePNGfile(char *filename, byte *data,
@@ -865,7 +865,10 @@ void V_DrawMouseSpeedBox(int speed)
     // If the mouse is turned off or acceleration is turned off, don't
     // draw the box at all.
 
-    if (!usemouse || fabs(mouse_acceleration - 1) < 0.01)
+    float absmouseacc = mouse_acceleration - 1;
+    if(absmouseacc<0) absmouseacc = -absmouseacc;
+
+    if (!usemouse || absmouseacc < 0.01)
     {
         return;
     }

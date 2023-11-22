@@ -3,86 +3,86 @@
 @set RVCTDIR=C:\Program Files\ARM\RVCT\Programs\4.0\400\win_32-pentium
 @set PATH=%VRXSDK%\bin;%RVCTDIR%;C:\vrxsrc\bin
 
-vrxcc -armcc,--c99 -p -c doomvx.c -o build/doomvx.o > compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c doomgeneric_vx.c -o build/doomgeneric_vx.o > compile.log 2>&1
 pause
-vrxcc -armcc,--c99 -p -c dummy.c -o build/dummy.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c am_map.c -o build/am_map.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c doomdef.c -o build/doomdef.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c doomstat.c -o build/doomstat.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c dstrings.c -o build/dstrings.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_event.c -o build/d_event.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_items.c -o build/d_items.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_iwad.c -o build/d_iwad.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_loop.c -o build/d_loop.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_main.c -o build/d_main.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_mode.c -o build/d_mode.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c d_net.c -o build/d_net.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c f_finale.c -o build/f_finale.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c f_wipe.c -o build/f_wipe.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c g_game.c -o build/g_game.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c hu_lib.c -o build/hu_lib.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c hu_stuff.c -o build/hu_stuff.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c info.c -o build/info.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_cdmus.c -o build/i_cdmus.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_endoom.c -o build/i_endoom.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_joystick.c -o build/i_joystick.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_scale.c -o build/i_scale.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_sound.c -o build/i_sound.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_system.c -o build/i_system.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_timer.c -o build/i_timer.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c memio.c -o build/memio.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_argv.c -o build/m_argv.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_bbox.c -o build/m_bbox.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_cheat.c -o build/m_cheat.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_config.c -o build/m_config.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_controls.c -o build/m_controls.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_fixed.c -o build/m_fixed.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_menu.c -o build/m_menu.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_misc.c -o build/m_misc.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c m_random.c -o build/m_random.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_ceilng.c -o build/p_ceilng.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_doors.c -o build/p_doors.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_enemy.c -o build/p_enemy.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_floor.c -o build/p_floor.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_inter.c -o build/p_inter.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_lights.c -o build/p_lights.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_map.c -o build/p_map.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_maputl.c -o build/p_maputl.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_mobj.c -o build/p_mobj.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_plats.c -o build/p_plats.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_pspr.c -o build/p_pspr.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_saveg.c -o build/p_saveg.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_setup.c -o build/p_setup.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_sight.c -o build/p_sight.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_spec.c -o build/p_spec.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_switch.c -o build/p_switch.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_telept.c -o build/p_telept.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_tick.c -o build/p_tick.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c p_user.c -o build/p_user.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_bsp.c -o build/r_bsp.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_data.c -o build/r_data.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_draw.c -o build/r_draw.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_main.c -o build/r_main.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_plane.c -o build/r_plane.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_segs.c -o build/r_segs.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_sky.c -o build/r_sky.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c r_things.c -o build/r_things.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c sha1.c -o build/sha1.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c sounds.c -o build/sounds.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c statdump.c -o build/statdump.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c st_lib.c -o build/st_lib.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c st_stuff.c -o build/st_stuff.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c s_sound.c -o build/s_sound.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c tables.c -o build/tables.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c v_video.c -o build/v_video.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c wi_stuff.c -o build/wi_stuff.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c w_checksum.c -o build/w_checksum.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c w_file.c -o build/w_file.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c w_main.c -o build/w_main.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c w_wad.c -o build/w_wad.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c z_zone.c -o build/z_zone.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c w_file_stdc.c -o build/w_file_stdc.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_input.c -o build/i_input.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c i_video.c -o build/i_video.o >> compile.log 2>&1
-vrxcc -armcc,--c99 -p -c doomgeneric.c -o build/doomgeneric.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c dummy.c -o build/dummy.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c am_map.c -o build/am_map.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c doomdef.c -o build/doomdef.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c doomstat.c -o build/doomstat.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c dstrings.c -o build/dstrings.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_event.c -o build/d_event.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_items.c -o build/d_items.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_iwad.c -o build/d_iwad.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_loop.c -o build/d_loop.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_main.c -o build/d_main.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_mode.c -o build/d_mode.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c d_net.c -o build/d_net.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c f_finale.c -o build/f_finale.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c f_wipe.c -o build/f_wipe.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c g_game.c -o build/g_game.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c hu_lib.c -o build/hu_lib.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c hu_stuff.c -o build/hu_stuff.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c info.c -o build/info.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_cdmus.c -o build/i_cdmus.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_endoom.c -o build/i_endoom.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_joystick.c -o build/i_joystick.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_scale.c -o build/i_scale.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_sound.c -o build/i_sound.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_system.c -o build/i_system.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_timer.c -o build/i_timer.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c memio.c -o build/memio.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_argv.c -o build/m_argv.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_bbox.c -o build/m_bbox.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_cheat.c -o build/m_cheat.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_config.c -o build/m_config.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_controls.c -o build/m_controls.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_fixed.c -o build/m_fixed.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_menu.c -o build/m_menu.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_misc.c -o build/m_misc.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c m_random.c -o build/m_random.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_ceilng.c -o build/p_ceilng.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_doors.c -o build/p_doors.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_enemy.c -o build/p_enemy.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_floor.c -o build/p_floor.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_inter.c -o build/p_inter.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_lights.c -o build/p_lights.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_map.c -o build/p_map.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_maputl.c -o build/p_maputl.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_mobj.c -o build/p_mobj.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_plats.c -o build/p_plats.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_pspr.c -o build/p_pspr.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_saveg.c -o build/p_saveg.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_setup.c -o build/p_setup.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_sight.c -o build/p_sight.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_spec.c -o build/p_spec.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_switch.c -o build/p_switch.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_telept.c -o build/p_telept.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_tick.c -o build/p_tick.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c p_user.c -o build/p_user.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_bsp.c -o build/r_bsp.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_data.c -o build/r_data.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_draw.c -o build/r_draw.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_main.c -o build/r_main.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_plane.c -o build/r_plane.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_segs.c -o build/r_segs.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_sky.c -o build/r_sky.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c r_things.c -o build/r_things.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c sha1.c -o build/sha1.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c sounds.c -o build/sounds.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c statdump.c -o build/statdump.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c st_lib.c -o build/st_lib.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c st_stuff.c -o build/st_stuff.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c s_sound.c -o build/s_sound.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c tables.c -o build/tables.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c v_video.c -o build/v_video.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c wi_stuff.c -o build/wi_stuff.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c w_checksum.c -o build/w_checksum.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c w_file.c -o build/w_file.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c w_main.c -o build/w_main.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c w_wad.c -o build/w_wad.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c z_zone.c -o build/z_zone.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c w_file_stdc.c -o build/w_file_stdc.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_input.c -o build/i_input.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c i_video.c -o build/i_video.o >> compile.log 2>&1
+vrxcc -armcc,--c99,--enum_is_int,--interface_enums_are_32_bit -v -g -p -c doomgeneric.c -o build/doomgeneric.o >> compile.log 2>&1
 

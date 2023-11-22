@@ -1,0 +1,1 @@
+ddl SETDRIVE.F APP.OUT "*GO=F:APP.OUT"

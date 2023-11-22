@@ -733,13 +733,13 @@ static void I_SDL_PrecacheSounds(sfxinfo_t *sounds, int num_sounds)
 	return;
     }
 
-    printf("I_SDL_PrecacheSounds: Precaching all sound effects..");
+    vxprintf("I_SDL_PrecacheSounds: Precaching all sound effects..");
 
     for (i=0; i<num_sounds; ++i)
     {
         if ((i % 6) == 0)
         {
-            printf(".");
+            vxprintf(".");
             fflush(stdout);
         }
 
@@ -753,7 +753,7 @@ static void I_SDL_PrecacheSounds(sfxinfo_t *sounds, int num_sounds)
         }
     }
 
-    printf("\n");
+    vxprintf("\n");
 }
 
 #else

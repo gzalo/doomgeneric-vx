@@ -260,7 +260,7 @@ static void D_Disconnected(void)
 
     // disconnected from server
 
-    printf("Disconnected from server.\n");
+    vxprintf("Disconnected from server.\n");
 }
 
 //
@@ -538,7 +538,7 @@ boolean D_InitNetGame(net_connect_data_t *connect_data)
                     NET_AddrToString(addr));
         }
 
-        printf("D_InitNetGame: Connected to %s\n", NET_AddrToString(addr));
+        vxprintf("D_InitNetGame: Connected to %s\n", NET_AddrToString(addr));
 
         // Wait for launch message received from server.
 

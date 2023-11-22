@@ -967,7 +967,7 @@ void M_Episode(int choice)
     if ( (gamemode == registered)
 	 && (choice > 2))
     {
-      fprintf( stderr,
+      vxprintferr(
 	       "M_Episode: 4th episode requires UltimateDOOM\n");
       choice = 0;
     }
@@ -1294,7 +1294,7 @@ M_StartMessage
     messageLastMenuActive = menuactive;
     messageToPrint = 1;
     messageString = string;
-    messageRoutine = routine;
+    messageRoutine = (void (*)(int))routine;
     messageNeedsInput = input;
     menuactive = true;
     return;

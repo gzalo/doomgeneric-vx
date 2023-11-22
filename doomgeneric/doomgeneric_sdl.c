@@ -136,11 +136,10 @@ void DG_Init(){
   window = SDL_CreateWindow("DOOM",
                             SDL_WINDOWPOS_UNDEFINED,
                             SDL_WINDOWPOS_UNDEFINED,
-                            DOOMGENERIC_RESY,
                             DOOMGENERIC_RESX,
+                            DOOMGENERIC_RESY,
                             SDL_WINDOW_SHOWN
                             );
-
   // Setup renderer
   renderer =  SDL_CreateRenderer( window, -1, SDL_RENDERER_ACCELERATED);
   // Clear winow
@@ -148,12 +147,12 @@ void DG_Init(){
   // Render the rect to the screen
   SDL_RenderPresent(renderer);
 
-  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_TARGET, DOOMGENERIC_RESY, DOOMGENERIC_RESX);
+  texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGB565, SDL_TEXTUREACCESS_TARGET, DOOMGENERIC_RESX, DOOMGENERIC_RESY);
 }
 
 void DG_DrawFrame()
 {
-  SDL_UpdateTexture(texture, NULL, DG_ScreenBuffer, DOOMGENERIC_RESY*sizeof(uint16_t));
+  SDL_UpdateTexture(texture, NULL, DG_ScreenBuffer, DOOMGENERIC_RESX*sizeof(uint16_t));
 
   SDL_RenderClear(renderer);
   SDL_RenderCopy(renderer, texture, NULL, NULL);
@@ -198,8 +197,45 @@ void DG_SetWindowTitle(const char * title)
   }
 }
 
+
+FILE *out = NULL;
+FILE *err = NULL;
+
+int vxprintf( const char *fmt, ... ){
+  va_list argptr;
+  va_start(argptr, fmt);
+  vfprintf(out, fmt, argptr);
+  va_end(argptr);
+  fflush(out);
+}
+int vxprintferr( const char *fmt, ... ){
+  va_list argptr;
+  va_start(argptr, fmt);
+  vfprintf(err, fmt, argptr);
+  va_end(argptr);
+  fflush(err);
+}
+int vxfflushout(){
+  fflush(out);
+}
+int vxfflusherr(){
+  fflush(err);
+}
+int vxputs ( const char * data){
+  fputs(data, out);
+}
+int vxputchar( int data){
+  fputc(data, out);
+}
+int vxvprintferr( const char *fmt, va_list args){
+  vfprintf(err, fmt, args);
+  fflush(err);
+}
+
 int main(int argc, char **argv)
 {
+    out = fopen("out.txt", "w");
+    err = fopen("err.txt", "w");
     doomgeneric_Create(argc, argv);
 
     for (int i = 0; ; i++)

@@ -52,5 +52,4 @@ typedef struct
 } ticcmd_t;
 
 
-
 #endif

@@ -56,11 +56,27 @@
 #endif
 
 #else
-	
-#define SHORT(x)  ((signed short) (x))
-#define LONG(x)   ((signed int) (x))
 
-#define SYS_LITTLE_ENDIAN
+
+#if 1
+#define SHORT(x) \
+        ((short int)((((unsigned short int)(x) & 0x00ff) << 8) | \
+                              (((unsigned short int)(x) & 0xff00) >> 8))) 
+
+#define LONG(x)   ((signed int) ( \
+        (((unsigned int)(x)&0xFF) << 24) | \
+        (((unsigned int)(x)&0xFF00) << 8) | \
+        (((unsigned int)(x)&0xFF0000) >> 8) |  \
+        (((unsigned int)(x)&0xFF000000) >> 24) \
+        ))
+#endif
+
+#if 0
+#define SHORT(x) (x)
+#define LONG(x) (x)
+#endif
+
+#define SYS_BIG_ENDIAN
 
 #endif /* FEATURE_SOUND */
 

@@ -1,0 +1,13 @@
+{
+    "files.associations": {
+        "i_swap.h": "c",
+        "errno.h": "c",
+        "string.h": "c",
+        "opensvc.h": "c",
+        "doomgeneric.h": "c",
+        "doomkeys.h": "c",
+        "stdio.h": "c",
+        "stdarg.h": "c",
+        "math.h": "c"
+    }
+}

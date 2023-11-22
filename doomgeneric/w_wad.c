@@ -154,7 +154,7 @@ wad_file_t *W_AddFile (char *filename)
 
     if (wad_file == NULL)
     {
-		printf (" couldn't open %s\n", filename);
+		vxprintf (" couldn't open %s\n", filename);
 		return NULL;
     }
 

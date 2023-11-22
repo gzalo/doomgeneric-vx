@@ -1003,7 +1003,7 @@ AM_drawFline
 	   || fl->b.x < 0 || fl->b.x >= f_w
 	   || fl->b.y < 0 || fl->b.y >= f_h)
     {
-        DEH_fprintf(stderr, "fuck %d \r", fuck++);
+        vxprintferr("fuck %d \r", fuck++);
 	return;
     }
 
