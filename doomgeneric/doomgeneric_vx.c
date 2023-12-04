@@ -54,6 +54,7 @@ void _fp_init(){
 //static displayInfo_t _display;
 //static uint16_t *framebuffer = NULL;
 static int console = -1;
+static int externalkbd = -1;
 static int card = -1;
 //static int serial = -1;
 static FILE *out;
@@ -61,6 +62,9 @@ static FILE *err;
 static int frameKeys = 0;
 static int prevFrameKeys = 0;
 static int frames = 0;
+
+static int externalKeys = 0;
+static int prevexternalKeys = 0;
 
 int vxprintf( const char *fmt, ... ){
   va_list argptr;
@@ -115,6 +119,7 @@ void DG_Init(void){
 }
 
 static char buf[500] = "";
+static char kbdbuf[32] = "";
 
 void DG_DrawFrame(void){
   //vxputs("Drawing frame\n");
@@ -125,6 +130,15 @@ void DG_DrawFrame(void){
   if(card_pending()){
     read(card, buf, sizeof(buf));
     frameKeys |= 128;
+  }
+
+  prevexternalKeys = externalKeys;
+
+  if(read_evt(EVT_COM1)&EVT_COM1){
+    int x = read(externalkbd, kbdbuf, 4);
+    if(x > 0){
+      externalKeys = kbdbuf[0];
+    }
   }
 
   int pending = kbd_pending_count();
@@ -264,6 +278,70 @@ int DG_GetKey(int* pressed, unsigned char* key){
     prevFrameKeys &= ~128;
     return 1;
   }
+
+  //UP LEFT FIRE DOWN RIGHT
+
+  if(externalKeys & 1 && !(prevexternalKeys & 1)){
+    *pressed = 1;
+    *key = KEY_UPARROW;
+    prevexternalKeys |= 1;
+    return 1;
+  }
+  if(externalKeys & 2 && !(prevexternalKeys & 2)){
+    *pressed = 1;
+    *key = KEY_LEFTARROW;
+    prevexternalKeys |= 2;
+    return 1;
+  }
+  if(externalKeys & 4 && !(prevexternalKeys & 4)){
+    *pressed = 1;
+    *key = KEY_FIRE;
+    prevexternalKeys |= 4;
+    return 1;
+  }
+  if(externalKeys & 8 && !(prevexternalKeys & 8)){
+    *pressed = 1;
+    *key = KEY_DOWNARROW;
+    prevexternalKeys |= 8;
+    return 1;
+  }
+  if(externalKeys & 16 && !(prevexternalKeys & 16)){
+    *pressed = 1;
+    *key = KEY_RIGHTARROW;
+    prevexternalKeys |= 16;
+    return 1;
+  }
+
+  if(!(externalKeys & 1) && (prevexternalKeys & 1)){
+    *pressed = 0;
+    *key = KEY_UPARROW;
+    prevexternalKeys &= ~1;
+    return 1;
+  }
+  if(!(externalKeys & 2) && (prevexternalKeys & 2)){
+    *pressed = 0;
+    *key = KEY_LEFTARROW;
+    prevexternalKeys &= ~2;
+    return 1;
+  }
+  if(!(externalKeys & 4) && (prevexternalKeys & 4)){
+    *pressed = 0;
+    *key = KEY_FIRE;
+    prevexternalKeys &= ~4;
+    return 1;
+  }
+  if(!(externalKeys & 8) && (prevexternalKeys & 8)){
+    *pressed = 0;
+    *key = KEY_DOWNARROW;
+    prevexternalKeys &= ~8;
+    return 1;
+  }
+  if(!(externalKeys & 16) && (prevexternalKeys & 16)){
+    *pressed = 0;
+    *key = KEY_RIGHTARROW;
+    prevexternalKeys &= ~16;
+    return 1;
+  }
   
   return 0;
 }
@@ -274,6 +352,14 @@ int main(int argc, char **argv){
     out = fopen("out.log", "w");
     err = fopen("err.log", "w");
     card = open(DEV_CARD, 0);
+    externalkbd = open(DEV_COM1, 0);
+
+	  open_block_t xcomblock;
+    xcomblock.rate = Rt_9600;
+    xcomblock.format = Fmt_A8N1 | Fmt_auto;
+	  xcomblock.protocol = P_char_mode;
+    xcomblock.parameter = 0;
+	  set_opn_blk(externalkbd, &xcomblock);
 
     if((_SYS_VERSION>=0x301) && (_syslib_version()>=0x301)) {
       //setFree(FREE_TYPE_NO_VALIDATE);
