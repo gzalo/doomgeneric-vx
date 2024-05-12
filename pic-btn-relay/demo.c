@@ -40,6 +40,8 @@ void sendByte(uint8_t data) {
 
 void main(void) {
     boardInit();
+
+    while(PIN_BTN0 && PIN_BTN1 && PIN_BTN2 && PIN_BTN3 && PIN_BTN4);
     
     while(1){
         uint8_t statusByte = 0;
