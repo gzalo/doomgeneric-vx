@@ -120,6 +120,18 @@ void DG_Init(void){
 
 static char buf[500] = "";
 static char kbdbuf[32] = "";
+static int pressedUp = 0;
+static int pressedDown = 0;
+static int pressedLeft = 0;
+static int pressedRight = 0;
+static int pressedFire = 0;
+static int pressedEnter = 0;
+static int releasedUp = 0;
+static int releasedDown = 0;
+static int releasedLeft = 0;
+static int releasedRight = 0;
+static int releasedFire = 0;
+static int releasedEnter = 0;
 
 void DG_DrawFrame(void){
   //vxputs("Drawing frame\n");
@@ -132,14 +144,29 @@ void DG_DrawFrame(void){
     frameKeys |= 128;
   }
 
-  prevexternalKeys = externalKeys;
 
-  if(read_evt(EVT_COM1)&EVT_COM1){
+  //if(read_evt(EVT_COM1)&EVT_COM1){
     int x = read(externalkbd, kbdbuf, 4);
     if(x > 0){
-      externalKeys = kbdbuf[0];
+      prevexternalKeys = externalKeys;
+      externalKeys = kbdbuf[x-1];
+
+      // UP LEFT FIRE DOWN RIGHT ENTER
+      if(externalKeys & 1 && !(prevexternalKeys & 1)) pressedUp = 1;
+      if(externalKeys & 2 && !(prevexternalKeys & 2)) pressedLeft = 1;
+      if(externalKeys & 4 && !(prevexternalKeys & 4)) pressedFire = 1;
+      if(externalKeys & 8 && !(prevexternalKeys & 8)) pressedDown = 1;
+      if(externalKeys & 16 && !(prevexternalKeys & 16)) pressedRight = 1;
+      if(externalKeys & 32 && !(prevexternalKeys & 32)) pressedEnter = 1;
+
+      if(!(externalKeys & 1) && (prevexternalKeys & 1)) releasedUp = 1;
+      if(!(externalKeys & 2) && (prevexternalKeys & 2)) releasedLeft = 1;
+      if(!(externalKeys & 4) && (prevexternalKeys & 4)) releasedFire = 1;
+      if(!(externalKeys & 8) && (prevexternalKeys & 8)) releasedDown = 1;
+      if(!(externalKeys & 16) && (prevexternalKeys & 16)) releasedRight = 1;
+      if(!(externalKeys & 32) && (prevexternalKeys & 32)) releasedEnter = 1;
     }
-  }
+  //}
 
   int pending = kbd_pending_count();
   if(pending){
@@ -281,65 +308,77 @@ int DG_GetKey(int* pressed, unsigned char* key){
 
   //UP LEFT FIRE DOWN RIGHT
 
-  if(externalKeys & 1 && !(prevexternalKeys & 1)){
+  if(pressedUp){
     *pressed = 1;
     *key = KEY_UPARROW;
-    prevexternalKeys |= 1;
+    pressedUp = 0;
     return 1;
   }
-  if(externalKeys & 2 && !(prevexternalKeys & 2)){
+  if(pressedLeft){
     *pressed = 1;
     *key = KEY_LEFTARROW;
-    prevexternalKeys |= 2;
+    pressedLeft = 0;
     return 1;
   }
-  if(externalKeys & 4 && !(prevexternalKeys & 4)){
+  if(pressedFire){
     *pressed = 1;
     *key = KEY_FIRE;
-    prevexternalKeys |= 4;
+    pressedFire = 0;
     return 1;
   }
-  if(externalKeys & 8 && !(prevexternalKeys & 8)){
+  if(pressedDown){
     *pressed = 1;
     *key = KEY_DOWNARROW;
-    prevexternalKeys |= 8;
+    pressedDown = 0;
     return 1;
   }
-  if(externalKeys & 16 && !(prevexternalKeys & 16)){
+  if(pressedRight){
     *pressed = 1;
     *key = KEY_RIGHTARROW;
-    prevexternalKeys |= 16;
+    pressedRight = 0;
+    return 1;
+  }
+  if(pressedEnter){
+    *pressed = 1;
+    *key = KEY_ENTER;
+    pressedEnter = 0;
     return 1;
   }
 
-  if(!(externalKeys & 1) && (prevexternalKeys & 1)){
+  if(releasedUp){
     *pressed = 0;
     *key = KEY_UPARROW;
-    prevexternalKeys &= ~1;
+    releasedUp = 0;
     return 1;
   }
-  if(!(externalKeys & 2) && (prevexternalKeys & 2)){
+  if(releasedLeft){
     *pressed = 0;
     *key = KEY_LEFTARROW;
-    prevexternalKeys &= ~2;
+    releasedLeft = 0;
     return 1;
   }
-  if(!(externalKeys & 4) && (prevexternalKeys & 4)){
+  if(releasedFire){
     *pressed = 0;
     *key = KEY_FIRE;
-    prevexternalKeys &= ~4;
+    releasedFire = 0;
     return 1;
   }
-  if(!(externalKeys & 8) && (prevexternalKeys & 8)){
+  if(releasedDown){
     *pressed = 0;
     *key = KEY_DOWNARROW;
-    prevexternalKeys &= ~8;
+    releasedDown = 0;
     return 1;
   }
-  if(!(externalKeys & 16) && (prevexternalKeys & 16)){
+  if(releasedRight){
     *pressed = 0;
     *key = KEY_RIGHTARROW;
-    prevexternalKeys &= ~16;
+    releasedRight = 0;
+    return 1;
+  }
+  if(releasedEnter){
+    *pressed = 0;
+    *key = KEY_ENTER;
+    releasedEnter = 0;
     return 1;
   }
   
