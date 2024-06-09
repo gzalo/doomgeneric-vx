@@ -6,11 +6,20 @@
 
 #define TRISIO_VAL 0b11111110
 #define PIN_TX   GP0
-#define PIN_BTN0   GP1
-#define PIN_BTN1   GP2
-#define PIN_BTN2   GP3
-#define PIN_BTN3   GP4
-#define PIN_BTN4   GP5
+#define PIN_RIGHT   GP1
+#define PIN_DOWN   GP2
+#define PIN_FIRE   GP3
+#define PIN_LEFT   GP4
+#define PIN_UP   GP5
+
+/*
+2 GP5 up
+3 GP4 left
+4 GP3 (ext pullup) fire
+5 GP2 down
+6 GP1 right
+7 GP0 serial output
+*/
 
 void boardInit(void){
     TRISIO = TRISIO_VAL;
@@ -41,15 +50,15 @@ void sendByte(uint8_t data) {
 void main(void) {
     boardInit();
 
-    while(PIN_BTN0 && PIN_BTN1 && PIN_BTN2 && PIN_BTN3 && PIN_BTN4);
+    while(PIN_RIGHT && PIN_DOWN && PIN_FIRE && PIN_LEFT && PIN_UP);
     
     while(1){
         uint8_t statusByte = 0;
-        if(!PIN_BTN4) statusByte |= 1;
-        if(!PIN_BTN3) statusByte |= 2;
-        if(!PIN_BTN2) statusByte |= 4;
-        if(!PIN_BTN1) statusByte |= 8;
-        if(!PIN_BTN0) statusByte |= 16;
+        if(!PIN_UP) statusByte |= 1;
+        if(!PIN_LEFT) statusByte |= 2;
+        if(!PIN_FIRE) statusByte |= 4;
+        if(!PIN_DOWN) statusByte |= 8;
+        if(!PIN_RIGHT) statusByte |= 16;
         sendByte(statusByte);
         __delay_ms(100);
     }
