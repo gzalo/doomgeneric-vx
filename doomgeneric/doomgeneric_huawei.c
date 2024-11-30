@@ -87,15 +87,15 @@ int DG_GetKey(int* pressed, unsigned char* doomKey)
             if(ev.code == 20){ *doomKey = DOOM_KEY_ENTER; *pressed = ev.value; return 1;}
             if(ev.code == 23){ *doomKey = DOOM_KEY_ENTER; *pressed = ev.value; return 1;}
             if(ev.code == 12){ *doomKey = DOOM_KEY_FIRE; *pressed = ev.value; return 1;}
-            if(ev.code == 13){ *doomKey = 'A'; *pressed = ev.value; return 1;}
-            if(ev.code == 14){ *doomKey = 'B'; *pressed = ev.value; return 1;}
+            if(ev.code == 13){ *doomKey = 'a'; *pressed = ev.value; return 1;}
+            if(ev.code == 14){ *doomKey = 'b'; *pressed = ev.value; return 1;}
             if(ev.code == 15){ *doomKey = DOOM_KEY_USE; *pressed = ev.value; return 1;}
             if(ev.code == 28){ *doomKey = DOOM_KEY_ESCAPE; *pressed = ev.value; return 1;}
             if(ev.code == 16){ *doomKey = DOOM_KEY_UPARROW; *pressed = ev.value; return 1;}
             if(ev.code == 17){ *doomKey = DOOM_KEY_DOWNARROW; *pressed = ev.value; return 1;}
             if(ev.code == 18){ *doomKey = DOOM_KEY_LEFTARROW; *pressed = ev.value; return 1;}
             if(ev.code == 19){ *doomKey = DOOM_KEY_RIGHTARROW; *pressed = ev.value; return 1;}
-            if(ev.code == 10){ *doomKey = 'Y'; *pressed = ev.value; return 1;}
+            if(ev.code == 10){ *doomKey = 'y'; *pressed = ev.value; return 1;}
         }
     } 
     return 0;
