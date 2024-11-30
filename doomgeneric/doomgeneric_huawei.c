@@ -39,7 +39,7 @@ void DG_Init()
     }
 
     eventFd = open("/dev/input/event0", O_RDONLY);
-    if (fd == -1) {
+    if (eventFd == -1) {
         perror("Cannot open input device");
         exit(1);
     }
@@ -70,19 +70,19 @@ uint32_t DG_GetTicksMs()
 
 int DG_GetKey(int* pressed, unsigned char* doomKey)
 {
-    ssize_t bytes = read(eventFd, &ev, sizeof(struct input_event));
     struct input_event ev;
+    ssize_t bytes = read(eventFd, &ev, sizeof(struct input_event));
     
     if (bytes == sizeof(struct input_event)) {
         if (ev.type == EV_KEY) {
-            if(ev.code == 12) doomKey = KEY_FIRE, pressed = ev.value, return 1;
-            if(ev.code == 15) doomKey = KEY_USE, pressed = ev.value, return 1;
-            if(ev.code == 28) doomKey = KEY_ESCAPE, pressed = ev.value, return 1;
-            if(ev.code == 20) doomKey = KEY_ENTER, pressed = ev.value, return 1;
-            if(ev.code == 16) doomKey = KEY_UP, pressed = ev.value, return 1;
-            if(ev.code == 17) doomKey = KEY_DOWN, pressed = ev.value, return 1;
-            if(ev.code == 18) doomKey = KEY_LEFT, pressed = ev.value, return 1;
-            if(ev.code == 19) doomKey = KEY_RIGHT, pressed = ev.value, return 1;
+            if(ev.code == 12) *doomKey = KEY_FIRE, *pressed = ev.value, return 1;
+            if(ev.code == 15) *doomKey = KEY_USE, *pressed = ev.value, return 1;
+            if(ev.code == 28) *doomKey = KEY_ESCAPE, *pressed = ev.value, return 1;
+            if(ev.code == 20) *doomKey = KEY_ENTER, *pressed = ev.value, return 1;
+            if(ev.code == 16) *doomKey = KEY_UP, *pressed = ev.value, return 1;
+            if(ev.code == 17) *doomKey = KEY_DOWN, *pressed = ev.value, return 1;
+            if(ev.code == 18) *doomKey = KEY_LEFT, *pressed = ev.value, return 1;
+            if(ev.code == 19) *doomKey = KEY_RIGHT, *pressed = ev.value, return 1;
         }
     } 
     return 0;
