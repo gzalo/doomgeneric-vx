@@ -77,10 +77,12 @@ int DG_GetKey(int* pressed, unsigned char* doomKey)
         if (ev.type == EV_KEY) {
             if(ev.value == 2) ev.value = 1;
             printf("K%d-%d\n",ev.code, ev.value);
-            if(ev.code == 12){ *doomKey = KEY_FIRE; *pressed = ev.value; return 1;}
+            if(ev.code == 20){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
+            if(ev.code == 12){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
+            if(ev.code == 23){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
+            if(ev.code == 13){ *doomKey = KEY_FIRE; *pressed = ev.value; return 1;}
             if(ev.code == 15){ *doomKey = KEY_USE; *pressed = ev.value; return 1;}
             if(ev.code == 28){ *doomKey = KEY_ESCAPE; *pressed = ev.value; return 1;}
-            if(ev.code == 20){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
             if(ev.code == 16){ *doomKey = KEY_UPARROW; *pressed = ev.value; return 1;}
             if(ev.code == 17){ *doomKey = KEY_DOWNARROW; *pressed = ev.value; return 1;}
             if(ev.code == 18){ *doomKey = KEY_LEFTARROW; *pressed = ev.value; return 1;}
