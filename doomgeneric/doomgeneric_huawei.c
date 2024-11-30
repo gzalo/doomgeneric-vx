@@ -61,9 +61,8 @@ void DG_SleepMs(uint32_t ms)
 uint32_t DG_GetTicksMs()
 {
     struct timeval  tp;
-    struct timezone tzp;
 
-    gettimeofday(&tp, &tzp);
+    gettimeofday(&tp, NULL);
 
     return (tp.tv_sec * 1000) + (tp.tv_usec / 1000); /* return milliseconds */
 }
