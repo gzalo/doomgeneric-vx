@@ -67,6 +67,15 @@ uint32_t DG_GetTicksMs()
     return (tp.tv_sec * 1000) + (tp.tv_usec / 1000); /* return milliseconds */
 }
 
+#define DOOM_KEY_RIGHTARROW	0xae
+#define DOOM_KEY_LEFTARROW	0xac
+#define DOOM_KEY_UPARROW		0xad
+#define DOOM_KEY_DOWNARROW	0xaf
+#define DOOM_KEY_USE			0xa2
+#define DOOM_KEY_FIRE		0xa3
+#define DOOM_KEY_ESCAPE		27
+#define DOOM_KEY_ENTER		13
+
 int DG_GetKey(int* pressed, unsigned char* doomKey)
 {
     struct input_event ev;
@@ -75,17 +84,15 @@ int DG_GetKey(int* pressed, unsigned char* doomKey)
     if (bytes == sizeof(struct input_event)) {
         if (ev.type == EV_KEY) {
             if(ev.value == 2) ev.value = 1;
-            printf("K%d-%d\n",ev.code, ev.value);
-            if(ev.code == 20){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
-            if(ev.code == 12){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
-            if(ev.code == 23){ *doomKey = KEY_ENTER; *pressed = ev.value; return 1;}
-            if(ev.code == 13){ *doomKey = KEY_FIRE; *pressed = ev.value; return 1;}
-            if(ev.code == 15){ *doomKey = KEY_USE; *pressed = ev.value; return 1;}
-            if(ev.code == 28){ *doomKey = KEY_ESCAPE; *pressed = ev.value; return 1;}
-            if(ev.code == 16){ *doomKey = KEY_UPARROW; *pressed = ev.value; return 1;}
-            if(ev.code == 17){ *doomKey = KEY_DOWNARROW; *pressed = ev.value; return 1;}
-            if(ev.code == 18){ *doomKey = KEY_LEFTARROW; *pressed = ev.value; return 1;}
-            if(ev.code == 19){ *doomKey = KEY_RIGHTARROW; *pressed = ev.value; return 1;}
+            if(ev.code == 20){ *doomKey = DOOM_KEY_ENTER; *pressed = ev.value; return 1;}
+            if(ev.code == 23){ *doomKey = DOOM_KEY_ENTER; *pressed = ev.value; return 1;}
+            if(ev.code == 12){ *doomKey = DOOM_KEY_FIRE; *pressed = ev.value; return 1;}
+            if(ev.code == 15){ *doomKey = DOOM_KEY_USE; *pressed = ev.value; return 1;}
+            if(ev.code == 28){ *doomKey = DOOM_KEY_ESCAPE; *pressed = ev.value; return 1;}
+            if(ev.code == 16){ *doomKey = DOOM_KEY_UPARROW; *pressed = ev.value; return 1;}
+            if(ev.code == 17){ *doomKey = DOOM_KEY_DOWNARROW; *pressed = ev.value; return 1;}
+            if(ev.code == 18){ *doomKey = DOOM_KEY_LEFTARROW; *pressed = ev.value; return 1;}
+            if(ev.code == 19){ *doomKey = DOOM_KEY_RIGHTARROW; *pressed = ev.value; return 1;}
         }
     } 
     return 0;
