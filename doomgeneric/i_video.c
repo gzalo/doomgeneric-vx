@@ -183,7 +183,7 @@ void I_InitGraphics (void)
 	s_Fb.yres = DOOMGENERIC_RESY;
 	s_Fb.xres_virtual = s_Fb.xres;
 	s_Fb.yres_virtual = s_Fb.yres;
-	s_Fb.bits_per_pixel = 32;
+	s_Fb.bits_per_pixel = 24;
 
 	s_Fb.blue.length = 8;
 	s_Fb.green.length = 8;

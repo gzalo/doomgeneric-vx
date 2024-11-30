@@ -39,16 +39,7 @@ void DG_Init()
 
 void DG_DrawFrame()
 {
-    int x, y;
-    for (y = 0; y < DOOMGENERIC_RESY; y++)
-    {
-        for (x = 0; x < DOOMGENERIC_RESX; x++){
-            uint32_t color = DG_ScreenBuffer[x+y*DOOMGENERIC_RESX];
-            frameBuffer[(x+y*screenWidth)*3] = color & 0xFF;
-            frameBuffer[(x+y*screenWidth)*3+1] = (color>>8) & 0xFF;
-            frameBuffer[(x+y*screenWidth)*3+2] = (color>>16) & 0xFF;
-        }
-    }
+    memcpy(frameBuffer, DG_ScreenBuffer, DOOMGENERIC_RESX * DOOMGENERIC_RESY * 3);
 }
 
 void DG_SleepMs(uint32_t ms)
