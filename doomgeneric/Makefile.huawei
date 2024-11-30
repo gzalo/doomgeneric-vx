@@ -1,6 +1,6 @@
 CROSS_COMPILE=/home/gzalo/x-tools/arm-unknown-linux-gnueabi/bin/arm-unknown-linux-gnueabi-
 CC=${CROSS_COMPILE}gcc
-CFLAGS+=-O3 -Wall
+CFLAGS+=-O3 -Wall -march=armv6 -mfloat-abi=soft
 LIBS+=-lm
 
 # subdirectory for objects
