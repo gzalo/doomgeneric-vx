@@ -299,6 +299,7 @@ void I_GetEvent(void)
 
             if (event.data1 != 0)
             {
+                printf("EVENT down %d %d\n", event.data1, event.data2);
                 D_PostEvent(&event);
             }
         }

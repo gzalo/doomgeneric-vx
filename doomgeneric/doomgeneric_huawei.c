@@ -75,6 +75,7 @@ int DG_GetKey(int* pressed, unsigned char* doomKey)
     
     if (bytes == sizeof(struct input_event)) {
         if (ev.type == EV_KEY) {
+            if(ev.value == 2) ev.value = 1;
             printf("K%d-%d\n",ev.code, ev.value);
             if(ev.code == 12){ *doomKey = KEY_FIRE; *pressed = ev.value; return 1;}
             if(ev.code == 15){ *doomKey = KEY_USE; *pressed = ev.value; return 1;}
