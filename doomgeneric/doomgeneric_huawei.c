@@ -8,6 +8,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <string.h>
+#include <stdint.h>
 
 #include <sys/ioctl.h>
 #include <sys/mman.h>
@@ -15,7 +16,7 @@
 #include <linux/fb.h>
 
 static int frameBufferFd = -1;
-static int* frameBuffer = 0;
+static uint8_t* frameBuffer = 0;
 const int screenWidth = 800;
 const int screenHeight = 480;
 
@@ -41,7 +42,7 @@ void DG_DrawFrame()
     int i;
     for (i = 0; i < DOOMGENERIC_RESY; ++i)
     {
-        memcpy(frameBuffer + i * 800, DG_ScreenBuffer + i * DOOMGENERIC_RESX, DOOMGENERIC_RESX * 3);
+        memcpy(frameBuffer + i * 800 * 3, DG_ScreenBuffer + i * DOOMGENERIC_RESX, DOOMGENERIC_RESX * 3);
     }
 }
 
